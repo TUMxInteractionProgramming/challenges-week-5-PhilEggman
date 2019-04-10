@@ -9,6 +9,20 @@
   * Accent color_text: black
   */
 
+  /** MATERIAL BUTTONS 
+  *
+  * height: 36px
+  * minimum width: 64px
+  * text size: 14px
+  * corner radius: 2px
+  * left and right padding:	16px
+  *	margin:	8px
+  * background color: white
+  *	border color: none
+  *	text color: primary text
+  *	text: uppercase
+  */
+
 /* GLOBAL */
 
 * {
@@ -23,6 +37,20 @@ body {
 
 button, strong {
     text-transform: uppercase;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* remove the blue focus outline of buttons*/
+button:focus {
+    outline: 0;
+}
+
+/* remove the blue focus outline of the input element*/
+input:focus {
+    outline: none!important;
 }
 
 /* LAYOUT */
@@ -50,6 +78,26 @@ button, strong {
     overflow-y: auto;
 }
 
+/* defines the primary background-color and the primary text-color for the primary buttons*/
+.primary-button {
+    background-color:  #3F51B5;
+    color: white;
+}
+
+/* defines the accent background-color and the accent text-color for the accent buttons*/
+.accented-button {
+    background-color: #CDDC39;
+    color: black; 
+}
+
+.primary-button:hover {
+    background-color: #192B8F;
+}
+
+.accented-button:hover {
+    background-color: #A7B613;
+}
+
 /* APP BAR */
 
 h1 {
@@ -66,7 +114,7 @@ h1 {
     padding: 24px 16px 20px 16px;
 
     /* MOOCUS image alignment */
-    position: relative; /* we need this, so that the image's absolute position is relative to the app bar */
+    position: relative; /* we need this, so that the image's absolute position is relative to the app bar */ 
 }
 
 h1#left-app-bar {
@@ -149,10 +197,29 @@ li.selected {
     border-left: 4px solid #3F51B5;
 }
 
+/* style of the floating action button*/
+#fab {
+    height: 56px;
+    width: 56px;
+    font-size: 38px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 56px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 90px;
+    right: 790px;
+    cursor: pointer;
+    box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+}
+
 /* TAB BAR */
 
 #tab-bar, #chat-bar {
     background-color: white;
+    height: 72px;
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -161,12 +228,9 @@ li.selected {
 }
 
 #tab-bar button, #chat-bar button {
-    background-color: white;
     border: none;
     font-size: 13px;
     width: 33%;
-    height: 72px;
-    padding: 16px;
 
     /* flexify the buttons by growing them equally */
     flex-grow: 1;
@@ -199,7 +263,7 @@ li.selected {
     /* emoji menu */
     /* colors and borders */
     background-color:white;
-    border: 1px solid black;
+    
 
     /* size & alignment */
     position: absolute;
@@ -221,6 +285,30 @@ li.selected {
     display: none;
 }
 
+/* style of the emoji button */
+#emojis-button {
+    height: 36px;
+    min-width: 64px;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 2px 16px 0 16px;
+    position: relative;
+    top: 18px;
+    margin: 0 8px 0px 8px;
+}
+
+/* style of the button to send new messages */
+#send-button {
+    height: 36px;
+    min-width: 64px;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 2px 16px 0 16px;
+    position: relative;
+    top: 18px;
+    margin: 0 8px 0 8px;
+}
+
 /* #8 #input #styles for font, border, and alignment */
 #chat-bar input {
     /* styles */
@@ -237,6 +325,34 @@ li.selected {
     margin-bottom: 8px;
     margin-left: 2.5%;
     position: relative;
+}
+
+/* triangle before a message */
+.message.other::before {
+    content:"";
+    height: 0;
+    width: 0;
+    border-top: 15px solid white;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent; 
+    position: absolute;
+    top: 23px;
+    left: -15px;
+    filter: drop-shadow(-2.5px 1px 1px rgba(0, 0, 0, .2));
+}
+
+/* triangle after the own message */
+.message.own::after {
+    content:"";
+    height: 0;
+    width: 0;
+    border-top: 15px solid white;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent; 
+    position: absolute;
+    top: 23px;
+    left: 600px;
+    filter: drop-shadow(3px 1px 1px rgba(0, 0, 0, .2));
 }
 
 .message h3 {
@@ -268,13 +384,20 @@ li.selected {
 .message p {
     background-color: white;
     padding: 16px;
+    box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12);
 }
 
 .message button {
     /* +5 min. button*/
-    background-color: #CDDC39;
-    color: black;
+   
+    height: 36px;
+    min-width: 64px;
+    font-size: 14px;
+    border-radius: 2px;
     text-transform: uppercase;
+    padding: 0 16px 0 16px;
 
     /* right/bottom alignment of button */
     position: absolute;
@@ -285,3 +408,101 @@ li.selected {
 .message.own {
     margin-left: 17.5%;
 }
+
+/* CSS classes for box-shadow from 1dp - 24dp by Scott Roa*/
+.md-whiteframe-1dp {
+    box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-2dp {
+    box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-3dp {
+    box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.2),
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-4dp {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-5dp {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 14px 0px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-6dp {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-7dp {
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
+    0px 7px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 16px 1px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-8dp {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 14px 2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-9dp {
+    box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2),
+    0px 9px 12px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 16px 2px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-10dp {
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
+    0px 10px 14px 1px rgba(0, 0, 0, 0.14),
+    0px 4px 18px 3px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-11dp {
+    box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2),
+    0px 11px 15px 1px rgba(0, 0, 0, 0.14),
+    0px 4px 20px 3px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-12dp {
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+    0px 12px 17px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 22px 4px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-13dp {
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+    0px 13px 19px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 24px 4px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-14dp {
+    box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2),
+    0px 14px 21px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 26px 4px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-15dp {
+    box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2),
+    0px 15px 22px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 28px 5px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-16dp {
+    box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0px 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 30px 5px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-17dp {
+    box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 17px 26px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 32px 5px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-18dp {
+    box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 18px 28px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 34px 6px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-19dp {
+    box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2),
+    0px 19px 29px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 36px 6px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-20dp {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+    0px 20px 31px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 38px 7px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-21dp {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+    0px 21px 33px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 40px 7px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-22dp {
+    box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2),
+    0px 22px 35px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 42px 7px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-23dp {
+    box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2),
+    0px 23px 36px 3px rgba(0, 0, 0, 0.14),
+    0px 9px 44px 8px rgba(0, 0, 0, 0.12); }
+.md-whiteframe-24dp {
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0px 9px 46px 8px rgba(0, 0, 0, 0.12); }

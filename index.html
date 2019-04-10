@@ -31,13 +31,14 @@
 <body onload="listChannels()">
 
 <!-- channel area -->
-<div id="channels">
+<div class="md-whiteframe-8dp" id="channels">
 
     <!-- APP BAR for APP TITLE -->
     <h1 id="left-app-bar">
         <img src="http://ip.lfe.mw.tum.de/sections/moocus.png" alt="Moocus, the chatty duck!" style="height: 56px;">
         chatter|app
     </h1>
+
 
     <!-- CHANNELS -->
     <ul>
@@ -89,11 +90,12 @@
                 <i class="fas fa-chevron-right"></i>
             </span>
         </li> -->
+        <p id="fab" class="accented-button">+</p>
        
     </ul>
 
     <!-- TAB BAR -->
-    <div id="tab-bar">
+    <div class="md-whiteframe-8dp" id="tab-bar">
         <button class="selected" id="tab-new" onclick="selectTab('#tab-new')">
             <!-- #7  replacing icons -->
             <i class="far fa-lightbulb"></i>
@@ -115,7 +117,7 @@
 <div id="chat">
 
     <!-- APP BAR for CHANNEL TITLE -->
-    <h1>
+    <h1 class="md-whiteframe-8dp">
         <span id="channel-name">#SevenContinents</span>
         <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
         <!-- #7 star is now font-awesome -->
@@ -128,61 +130,61 @@
             <h3><a href="http://w3w.co/cheeses.yard.applies" target="_blank"><strong>cheeses.yard.applies</strong></a>
                 Wed, June 20th, 13:37 <em>15 min. left</em></h3>
             <p>What's the place you folks call home?</p>
-            <button>+5 min.</button>
+            <button class="accented-button">+5 min.</button>
         </div>
 
-        <div class="message">
+        <div class="message other">
             <h3><a href="http://w3w.co/truck.cotton.zone" target="_blank"><strong>truck.cotton.zone</strong></a>
                 Wed, June 20th, 13:39 <em>4 min. left</em></h3>
             <p>BRISBANE! Hang loose!</p>
-            <button>+5 min.</button>
+            <button class="accented-button">+5 min.</button>
         </div>
 
-        <div class="message">
+        <div class="message other">
             <h3><a href="http://w3w.co/thus.best.dishes" target="_blank"><strong>thus.best.dishes</strong></a>
                 Wed, June 20th, 14:02 <em>12 min. left</em></h3>
             <p>The big apple.</p>
-            <button>+5 min.</button>
+            <button class="accented-button">+5 min.</button>
         </div>
 
-        <div class="message">
+        <div class="message other">
             <h3><a href="http://w3w.co/driveway.helper.magazine"
                    target="_blank"><strong>driveway.helper.magazine</strong></a>
                 Wed, June 20th, 14:02 <em>7 min. left</em></h3>
             <p>Eu sou um Cariocas.</p>
-            <button>+5 min.</button>
+            <button class="accented-button">+5 min.</button>
         </div>
 
-        <div class="message">
+        <div class="message other">
             <h3><a href="http://w3w.co/escapes.pitch.saucepan"
                    target="_blank"><strong>escapes.pitch.saucepan</strong></a>
                 Wed, June 20th, 14:07 <em>14 min. left</em></h3>
             <p>Greetings from the western cape!</p>
-            <button>+5 min.</button>
+            <button class="accented-button">+5 min.</button>
         </div>
 
-        <div class="message">
+        <div class="message other">
             <h3><a href="http://w3w.co/meanings.identity.pays"
                    target="_blank"><strong>meanings.identity.pays</strong></a>
                 Wed, June 20th, 04:08 <em>15 min. left</em></h3>
             <p>北京</p>
-            <button>+5 min.</button>
+            <button class="accented-button">+5 min.</button>
         </div>
 
     </div>
 
     <!-- ChAT BAR -->
     <div id="chat-bar">
-        <button id="emojis-button" onclick="toggleEmojis()">
+        <button class="primary-button" id="emojis-button" onclick="toggleEmojis()">
             <!-- #7 replacing icons -->
             <i class="far fa-smile"></i>
         </button>
-        <div id="emojis">&#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605; &#x1F606; &#x1F607;</div>
+        <div class="md-whiteframe-18dp" id="emojis">&#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605; &#x1F606; &#x1F607;</div>
         <!-- #8 create a new input element which accepts text and has a prefill as well as a character limit.
                It also gets an id -->
         <input type="text" placeholder="Message..." maxlength="140" id="message">
         <!-- #8 send message requires a button -->
-        <button onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
+        <button class="accented-button" id="send-button" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
     </div>
 </div>
 
