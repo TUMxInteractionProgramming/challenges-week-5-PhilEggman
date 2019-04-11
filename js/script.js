@@ -1,6 +1,8 @@
 /* start the external action and say hello */
 console.log("App is alive");
 
+/** #10 Create global array */
+var channels = [yummy, sevencontinents, killerapp, firstpersononmars, octoberfest];
 
 /** #7 Create global variable */
 var currentChannel;
@@ -80,6 +82,8 @@ function selectTab(tabId) {
  */
 function toggleEmojis() {
     $('#emojis').toggle(); // #toggle
+    var emojis = require ('emojis-list')
+    console.log(emojis[0]);
 }
 
 /**
@@ -109,15 +113,25 @@ function sendMessage() {
     var message = new Message($('#message').val());
     console.log("New message:", message);
 
-    // #8 convenient message append with jQuery:
-    $('#messages').append(createMessageElement(message));
+    var stringLength = message.text.length;
+    // #10 it's not possible to send empty messages
+    if(stringLength == 0) {
+        $('#message').val('');
+    } else {
+         // #8 convenient message append with jQuery:
+        $('#messages').append(createMessageElement(message));
+        // #10 the message object gets pushed into the currentChannels's messages array
+        currentChannel.messages.push(message);
+        // #10 the messageCount property increases with every send message
+        currentChannel.messageCount++;
 
-    // #8 messages will scroll to a certain point if we apply a certain height, in this case the overall scrollHeight of the messages-div that increases with every message;
-    // it would also scroll to the bottom when using a very high number (e.g. 1000000000);
-    $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+        // #8 messages will scroll to a certain point if we apply a certain height, in this case the overall scrollHeight of the messages-div that increases with every message;
+        // it would also scroll to the bottom when using a very high number (e.g. 1000000000);
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
 
-    // #8 clear the message input
-    $('#message').val('');
+        // #8 clear the message input
+        $('#message').val('');
+    }
 }
 
 /**
@@ -148,13 +162,13 @@ function createMessageElement(messageObject) {
 function listChannels() {
     // #8 channel onload
     //$('#channels ul').append("<li>New Channel</li>")
-
-    // #8 five new channels
-    $('#channels ul').append(createChannelElement(yummy));
-    $('#channels ul').append(createChannelElement(sevencontinents));
-    $('#channels ul').append(createChannelElement(killerapp));
-    $('#channels ul').append(createChannelElement(firstpersononmars));
-    $('#channels ul').append(createChannelElement(octoberfest));
+    $('#channels ul li').empty();
+    channels.sort(compareTrending);
+    // #10 five new channels
+    var i;
+    for (i=0; i < channels.length; i++){
+        $('#channels ul').append(createChannelElement(channels[i]));
+    }
 }
 
 /**
@@ -174,7 +188,7 @@ function createChannelElement(channelObject) {
      */
 
     // create a channel
-    var channel = $('<li>').text(channelObject.name);
+    var channel = $('<li onclick="switchChannel(yummy)">').text(channelObject.name);
 
     // create and append channel meta
     var meta = $('<span>').addClass('channel-meta').appendTo(channel);
@@ -192,4 +206,91 @@ function createChannelElement(channelObject) {
 
     // return the complete channel
     return channel;
+}
+
+/** 
+ * #10 this function compares the messageCount of the channels
+ * @returns the difference 
+ * */
+function compareTrending () {
+    var i;
+    var j;
+    for (i=0; i < channels.length;i++){
+        for (j=1; channels.length; j++){
+            if (channels[i].messageCount < channels[j].messageCount) {
+                return channels[j].messageCount 
+            } else {
+                return channels[i].messageCount;
+            }
+        }
+    }
+}
+
+/**
+ * #10 clicking on the floating action button clears all messages in the div "messages",
+ * creats a input field and the send button changes into the "create" button
+ */
+function nameNewChannel () {
+    $('#messages').empty();
+    $('#channel-name').empty();
+    $('#channel-location').empty();
+    $('#chat h1 i').remove();
+    $('#chat h1').append('<input placeholder="Enter a #ChannelName"></input>');
+    $('#chat h1').append('<button id="abort" class="primary-button" onclick="restoreCurrentChannel()">x abort</button>');
+    $('#send-button').remove();
+    $('#chat-bar').append('<button id="create-button" class="accented-button" onclick="createNewChannel()">create</button>');
+}
+
+/**
+ * #10 clicking closes the new app bar and resotres the currentChannel
+ */
+function restoreCurrentChannel() {
+    $('#chat h1 input').remove();
+    $('#chat h1 button').remove();
+    $('#create-button').remove();
+    $('#channel-name').html(currentChannel.name);
+    $('#channel-location').html( ' by <a href="http://w3w.co/'+ currentChannel.createdBy+ '" target="_blank">'+ currentChannel.createdBy+ '</a>');
+    $('#chat h1').append('<i class="fas fa-star" onclick="star()"></i>');
+    $('#chat-bar').append('<button class="accented-button" id="send-button" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>');
+}
+
+/**
+ * #10 This #constructor function creates a new chat channel.
+ * @param text `String` a message text
+ * @constructor
+ */
+function NewChannel (text) {
+    this.name = text;
+    this.createdBy = currentLocation.what3words;
+    this.createdOn = new Date();
+    this.starred = true;
+    this.messageCount = 1;
+    this.messages = [];
+}
+
+/**
+ * #10 clicking the create button creates a new channel and the new message 
+ */
+function createNewChannel () {
+    
+    if($('#message').val().length != 0 && $('#chat h1 input').val().length != 0 && $('#chat h1 input').val().charAt(0) == '#') {
+        var newChannel = new NewChannel($('#chat h1 input').val());
+        channels.push(newChannel);
+        newChannel.messages.push($('#message').val());
+        currentChannel = newChannel;
+
+        $('#chat h1 input').remove();
+        $('#chat h1 button').remove();
+        $('#create-button').remove();
+        $('#channel-name').html(currentChannel.name);
+        $('#channel-location').html( ' by <a href="http://w3w.co/'+ currentChannel.createdBy+ '" target="_blank">'+ currentChannel.createdBy+ '</a>');
+        $('#chat h1').append('<i class="fas fa-star" onclick="star()"></i>');
+        $('#chat-bar').append('<button class="accented-button" id="send-button" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>');
+
+        sendMessage();
+
+    } else {
+        return false;
+    }
+
 }

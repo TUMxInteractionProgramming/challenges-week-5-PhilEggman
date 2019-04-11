@@ -9,7 +9,7 @@
   * Accent color_text: black
   */
 
-  /** MATERIAL BUTTONS 
+  /** #9 MATERIAL BUTTONS 
   *
   * height: 36px
   * minimum width: 64px
@@ -43,12 +43,12 @@ button {
     cursor: pointer;
 }
 
-/* remove the blue focus outline of buttons*/
+/* #9 remove the blue focus outline of buttons*/
 button:focus {
     outline: 0;
 }
 
-/* remove the blue focus outline of the input element*/
+/* #9 remove the blue focus outline of the input element*/
 input:focus {
     outline: none!important;
 }
@@ -78,13 +78,13 @@ input:focus {
     overflow-y: auto;
 }
 
-/* defines the primary background-color and the primary text-color for the primary buttons*/
+/* #9 defines the primary background-color and the primary text-color for the primary buttons*/
 .primary-button {
     background-color:  #3F51B5;
     color: white;
 }
 
-/* defines the accent background-color and the accent text-color for the accent buttons*/
+/* #9 defines the accent background-color and the accent text-color for the accent buttons*/
 .accented-button {
     background-color: #CDDC39;
     color: black; 
@@ -137,6 +137,28 @@ h1 i {
     right: 16px;
     /* #7 #icns #small adjust icon size */
     font-size:24px;
+}
+
+/* styles the input field for a new channel */
+#chat h1 input {
+    width: 88%; 
+    height: 30px; 
+    font-size: 14px;
+    position: relative;
+    bottom: 6px;
+    border-radius: 4px;
+}
+
+/* style the aport button in the right tab-bar */
+#abort {
+    height: 36px;
+    font-size: 10px;
+    border-radius: 2px;
+    border: none;
+    padding: 2px 16px 0 16px;
+    position: relative;
+    float: right;
+    bottom: 8px;
 }
 
 /* CHANNELS LIST */
@@ -197,7 +219,7 @@ li.selected {
     border-left: 4px solid #3F51B5;
 }
 
-/* style of the floating action button*/
+/* #9 style of the floating action button*/
 #fab {
     height: 56px;
     width: 56px;
@@ -206,9 +228,10 @@ li.selected {
     text-align: center;
     line-height: 56px;
     border-radius: 50%;
-    position: fixed;
-    bottom: 90px;
-    right: 790px;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    float: right;
     cursor: pointer;
     box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
@@ -283,9 +306,13 @@ li.selected {
 
     /* hide the #smile menu */
     display: none;
+
+    box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 18px 28px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 34px 6px rgba(0, 0, 0, 0.12); 
 }
 
-/* style of the emoji button */
+/* #9 style of the emoji button */
 #emojis-button {
     height: 36px;
     min-width: 64px;
@@ -297,8 +324,20 @@ li.selected {
     margin: 0 8px 0px 8px;
 }
 
-/* style of the button to send new messages */
+/* #9 style of the button to send new messages */
 #send-button {
+    height: 36px;
+    min-width: 64px;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 2px 16px 0 16px;
+    position: relative;
+    top: 18px;
+    margin: 0 8px 0 8px;
+}
+
+/* #10 style of the create button */
+#create-button {
     height: 36px;
     min-width: 64px;
     font-size: 14px;
@@ -327,7 +366,7 @@ li.selected {
     position: relative;
 }
 
-/* triangle before a message */
+/* #9 triangle before a message */
 .message.other::before {
     content:"";
     height: 0;
@@ -341,7 +380,7 @@ li.selected {
     filter: drop-shadow(-2.5px 1px 1px rgba(0, 0, 0, .2));
 }
 
-/* triangle after the own message */
+/* #9 triangle after the own message */
 .message.own::after {
     content:"";
     height: 0;
